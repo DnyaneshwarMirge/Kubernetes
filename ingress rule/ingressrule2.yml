@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress  # Name of the ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /  # Ensures correct URL path forwarding
+spec:
+  rules:
+    - host: af025a4ee0bf543a985c59eac67a4c2d-1290041203.ap-south-1.elb.amazonaws.com  # Replace with your actual domain or leave blank for default
+      http:
+        paths:
+          - path: /nginx  # Route for nginx
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service  # Name of the nginx service
+                port:
+                  number: 80  # nginx service port
+          - path: /tomcat  # Route for tomcat
+            pathType: Prefix
+            backend:
+              service:
+                name: tomcat-service  # Name of the tomcat service
+                port:
+                  number: 8080  # tomcat service port
