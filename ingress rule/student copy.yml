@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: todo 
+  name: student
   labels: 
-    app: todo
+    app: student
 spec:
   replicas: 3
   strategy: 
     type: RollingUpdate
   template:
     metadata: 
-      name: todo
+      name: student
       labels:
-        app: todo
+        app: student
     spec:
       containers:
         - name: http
-          image: dmirge/todo:latest
+          image: dmirge/student:latest
           resources: 
             requests:    
               cpu: "25m"
@@ -30,19 +30,19 @@ spec:
               protocol: TCP
   selector:
     matchLabels:
-      app: todo
+      app: student
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:  
-  name: todo-hpa1
+  name: student-hpa1
   labels:
-    app: todo-hpa1
+    app: student-hpa1
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: todo
+    name: student
   minReplicas: 1
   maxReplicas: 2
   metrics:
@@ -56,13 +56,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-service
+  name: student-service
   labels:
-    app: todo
+    app: student
 spec:
   type: ClusterIP  # This exposes the service internally in the cluster
   selector:
-    app: todo      # It selects the 'todo' app to route traffic to its pods
+    app: student      # It selects the 'todo' app to route traffic to its pods
   ports:
     - protocol: TCP
       port: 80        # The port the service will expose

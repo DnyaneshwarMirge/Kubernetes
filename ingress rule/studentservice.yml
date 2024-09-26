@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-service  # Name of the service
+  labels:
+    app: student  # Label to identify the service
+spec:
+  type: ClusterIP  # The service type for internal cluster communication
+  selector:
+    app: student  # Matches pods with the app label 'student'
+  ports:
+    - protocol: TCP
+      port: 80        # Port exposed by the service
+      targetPort: 80  # Port on the container to which traffic will be directed
