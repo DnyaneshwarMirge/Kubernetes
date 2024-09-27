@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: employeesrv
+  name: studentsrv
 spec:
   type: ClusterIP
   selector:
-    app: employeedeploy
+    app: studentdeploy
   ports:
     - port: 8080
       targetPort: 8080
