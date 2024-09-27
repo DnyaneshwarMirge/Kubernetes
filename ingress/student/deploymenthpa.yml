@@ -19,7 +19,7 @@ spec:
         spec: 
           containers:
              - name: studentdeploy
-               image: dmirge/todo:v2
+               image: dmirge/neogym:latest
                ports:
                   - containerPort: 8080
                     protocol: TCP
