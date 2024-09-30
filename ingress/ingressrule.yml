@@ -18,7 +18,7 @@ spec:
                 name: todosrv
                 port:
                   number: 80
-         -  path: /employee
+         -  path: /student
             pathType: Prefix
             backend:
               service: 
